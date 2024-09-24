@@ -807,7 +807,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1620732101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1066,7 +1066,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dirtPrefab: {fileID: 7269539614715028831, guid: 9d9ff2ed54be430418cd236993ed2984,
     type: 3}
-  speed: 1
+  speed: 5
 --- !u!1001 &7571411123158560038
 PrefabInstance:
   m_ObjectHideFlags: 0
