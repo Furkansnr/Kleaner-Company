@@ -20,6 +20,7 @@ public class PlayerBrush : MonoBehaviour
     [SerializeField] private State _playerState = State.Idle;
     [SerializeField] private float scaleFactor;
     [SerializeField] private float decreaseSpeed;
+    [SerializeField] private ParticleSystem bubleParticle;
     private bool _backIdle;
     private float health = 100f;
 
@@ -70,10 +71,12 @@ public class PlayerBrush : MonoBehaviour
         {
             case State.Clean when health > 0:
                 _playerState = state;
+                BubleActive(true);
                 break;
 
             case State.BackIdle:
                 _playerState = state;
+                BubleActive(false);
                 break;
         }
     }
@@ -117,4 +120,10 @@ public class PlayerBrush : MonoBehaviour
     }
 
     private void SpongeFilled() => health = 100;
+
+    private void BubleActive(bool active)
+    {
+        if(active) bubleParticle.Play();
+        else bubleParticle.Stop();
+    }
 }
