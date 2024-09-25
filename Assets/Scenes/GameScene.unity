@@ -778,7 +778,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1620732101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -794,6 +794,7 @@ MonoBehaviour:
   dirtPrefab: {fileID: 7269539614715028831, guid: 9d9ff2ed54be430418cd236993ed2984,
     type: 3}
   speed: 1
+  spawnPoints: []
 --- !u!65 &1620732102
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -960,6 +961,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3000075945505312590, guid: eaf0ef0727862b54e834c25995e63459,
+        type: 3}
+      propertyPath: checkSpeed
+      value: 400
+      objectReference: {fileID: 0}
     - target: {fileID: 7590565240624004222, guid: eaf0ef0727862b54e834c25995e63459,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1124,11 +1130,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameLevel
       objectReference: {fileID: 0}
-    - target: {fileID: 2943728546778446842, guid: 3af883d2eb6c64b4f93b9151fdd8abea,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2943728546778446845, guid: 3af883d2eb6c64b4f93b9151fdd8abea,
         type: 3}
       propertyPath: m_RootOrder
@@ -1184,34 +1185,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4105465090831397423, guid: 3af883d2eb6c64b4f93b9151fdd8abea,
+    - target: {fileID: 3409366724882711855, guid: 3af883d2eb6c64b4f93b9151fdd8abea,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.7
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3af883d2eb6c64b4f93b9151fdd8abea, type: 3}
---- !u!1 &2132306742 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4110653135079269529, guid: 3af883d2eb6c64b4f93b9151fdd8abea,
-    type: 3}
-  m_PrefabInstance: {fileID: 2132306741}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2132306743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2132306742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5b512693fc35544db087b5dc3a395b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dirtPrefab: {fileID: 7269539614715028831, guid: 9d9ff2ed54be430418cd236993ed2984,
-    type: 3}
-  speed: 1
 --- !u!1001 &1022296506964052828
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1227,7 +1207,7 @@ PrefabInstance:
     - target: {fileID: 1022296508083976559, guid: f7a6e578a40bb2d4dafed05fb9a284fc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 6.29
       objectReference: {fileID: 0}
     - target: {fileID: 1022296508083976559, guid: f7a6e578a40bb2d4dafed05fb9a284fc,
         type: 3}
