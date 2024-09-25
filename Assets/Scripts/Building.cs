@@ -8,7 +8,6 @@ public class Building : MonoBehaviour
 {
     [SerializeField] private GameObject dirtPrefab;
     [SerializeField] private float speed=5f;
-    
 
     private void Update()
     {
