@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -103,5 +104,13 @@ public class DirtClean : MonoBehaviour
         copy.SetPixels(pixels);
         copy.Apply();
         return copy;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Ground"))
+        {
+           GameManager.instance.CalculateScore(dirtAmountTotal - cleanAmountTotal);
+        }
     }
 }
