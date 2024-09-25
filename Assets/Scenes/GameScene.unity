@@ -950,6 +950,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3000075944886835060, guid: eaf0ef0727862b54e834c25995e63459,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3000075945505312590, guid: eaf0ef0727862b54e834c25995e63459,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7590565240624004222, guid: eaf0ef0727862b54e834c25995e63459,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1282,6 +1292,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: "S\xFCnger"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7571411122660002870, guid: 4f72621c6b34980489d633183d77b796,
+        type: 3}
+      propertyPath: decreaseSpeed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7969602434216936797, guid: 4f72621c6b34980489d633183d77b796,
         type: 3}

@@ -57,9 +57,6 @@ public class PlayerBrush : MonoBehaviour
             newState = State.BackIdle;
         if (_playerState == State.Clean && health <= 0)
             newState = State.BackIdle;
-        if(Input.GetKeyDown(KeyCode.Space))
-            GameManager.instance.EmitSpongeFilled();
-
         return newState;
     }
 
@@ -117,6 +114,10 @@ public class PlayerBrush : MonoBehaviour
     {
         health -= Time.deltaTime * decreaseSpeed;
         GameManager.instance.EmitDecreaseHealthAction(health / 100);
+        if (health <= 1)
+        {
+          GameManager.instance.OpenSkillCheckPanelManager();
+        }
     }
 
     private void SpongeFilled() => health = 100;

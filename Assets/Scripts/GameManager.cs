@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public Action<int> ScoreAction;
     public Action<float> DecreaseHealthAction;
     public Action SpongeFilled;
+    public Action SkillCheckAppears;
 
     private void Awake()
     {
@@ -44,6 +45,8 @@ public class GameManager : MonoBehaviour
 
     public void EmitSpongeFilled() => SpongeFilled?.Invoke();
 
+    public void OpenSkillCheckPanelManager() => SkillCheckAppears?.Invoke();
+    
     void EmitScoreAction(int score)
     {
         _totalScore += score;
