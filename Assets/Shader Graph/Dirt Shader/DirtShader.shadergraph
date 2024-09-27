@@ -1997,7 +1997,7 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"ff220e602c6f1064c9b38a41dd5ffb0e\",\"type\":3}}",
+        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"547331c9c28dc1042a53e66316024416\",\"type\":3}}",
         "m_Guid": ""
     },
     "isMainTexture": false,

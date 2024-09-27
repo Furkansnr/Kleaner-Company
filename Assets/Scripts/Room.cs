@@ -5,8 +5,21 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    // private void OnTriggerExit(Collider other)
-    // {
-    //     if(other.CompareTag("Ground")) print("here");
-    // }
+    public Transform[] spawnPoints;
+    private Building building;
+
+    private void Awake()
+    {
+        building = transform.parent.GetComponent<Building>();
+    }
+
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Ground"))
+        {
+            print("here");
+            building.ResetRoomPosition(transform);
+        }
+    }
 }
