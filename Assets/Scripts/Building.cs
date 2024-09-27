@@ -8,46 +8,55 @@ public class Building : MonoBehaviour
 {
     [SerializeField] private GameObject dirtPrefab;
     [SerializeField] private float speed = 5f;
-    [SerializeField] private Transform[] spawnPoints;
-    private float _deadZoneY = -6.14f;
-    private Vector3 _firstPos;
+    [SerializeField] private GameObject[] rooms;
+    private int[] spawnChances={ 50, 50, 50, 50 };
 
-    private void Start()
-    {
-        _firstPos = transform.localPosition;
-    }
 
     private void Update()
     {
-        transform.localPosition += new Vector3(0, -speed * Time.deltaTime, 0);
-        
-        if(transform.localPosition.y < _deadZoneY) ResetPosition();
+        transform.position += new Vector3(0, -speed * Time.deltaTime, 0);
     }
 
-    private void ResetPosition()
+    public void ResetRoomPosition(Transform room)
     {
-        transform.localPosition = _firstPos;
-
-        int spawnChance = 50;
-
+        Vector3 newPosition= new Vector3(room.transform.localPosition.x,
+            room.transform.localPosition.y + 4.05f);
+        Destroy(room.gameObject);
+        GameObject newRoom = Instantiate(GetRandomRoom(), transform);
+        newRoom.transform.localPosition = newPosition;
+        Transform[] spawnPoints = newRoom.GetComponent<Room>().spawnPoints;
         for (int i = 0; i < spawnPoints.Length; i++)
         {
-            if(spawnPoints[i].childCount > 0) Destroy(spawnPoints[i].GetChild(0).gameObject);
+            DestroySpawnChilds(spawnPoints, i);
+            SpawnDirt(spawnPoints, i);
         }
+    }
 
-        for (int i = 0; i < spawnPoints.Length; i++)
+    private GameObject GetRandomRoom() => rooms[Random.Range(0, rooms.Length - 1)];
+
+    private void DestroySpawnChilds(Transform[] spawnPoints, int i)
+    {
+        // Destory spawn points childs
+        if (spawnPoints[i].childCount > 0)
         {
-            if (spawnChance > Random.Range(0, 101))
+            for (int j = 0; j < spawnPoints[i].childCount; j++)
             {
-                spawnChance = 50;
-               GameObject dirt= Instantiate(dirtPrefab, spawnPoints[i]);
-               dirt.transform.localPosition=Vector3.zero;
-               dirt.transform.rotation=Quaternion.Euler(0,0,-90);
+                Destroy(spawnPoints[i].GetChild(j).gameObject);
             }
-            else
-            {
-                spawnChance += 20;
-            }
+        }
+    }
+    private void SpawnDirt(Transform[] spawnPoints, int i)
+    {
+        // Spawn new dirt object or increase spawn chance for later
+        if (spawnChances[i] > Random.Range(0, 101))
+        {
+            GameObject dirt = Instantiate(dirtPrefab, spawnPoints[i]);
+            dirt.transform.localPosition = Vector3.zero;
+            dirt.transform.localRotation=Quaternion.Euler(0,0,90);
+        }
+        else
+        {
+            spawnChances[i] += 20;
         }
     }
 }

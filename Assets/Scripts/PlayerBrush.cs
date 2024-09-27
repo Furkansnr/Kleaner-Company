@@ -21,21 +21,23 @@ public class PlayerBrush : MonoBehaviour
     [SerializeField] private float scaleFactor;
     [SerializeField] private float decreaseSpeed;
     [SerializeField] private ParticleSystem bubleParticle;
+    [SerializeField] private float firstZaxis;
+    [SerializeField] private float cleanZaxis;
     private bool _backIdle;
     private float health = 100f;
 
 
     private void Start()
     {
-        _cleanTween = transform.DOMoveZ(1.4f, 0.25f)
+        _cleanTween = transform.DOMoveZ(cleanZaxis, 0.25f)
             .SetLoops(-1, LoopType.Yoyo).SetAutoKill(false)
             .SetEase(Ease.OutSine);
         _cleanTween.Pause();
-        _backTween = transform.DOMoveZ(0.65f, 0.25f).OnComplete((() => { _playerState = State.Idle; }))
+        _backTween = transform.DOMoveZ(firstZaxis, 0.25f).OnComplete((() => { _playerState = State.Idle; }))
             .SetAutoKill(false)
             .SetEase(Ease.OutSine);
         _backTween.Pause();
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0.65f);
+        transform.position = new Vector3(transform.position.x, transform.position.y, firstZaxis);
 
         GameManager.instance.SpongeFilled += SpongeFilled;
     }
@@ -102,7 +104,7 @@ public class PlayerBrush : MonoBehaviour
         if (_cleanTween.IsPlaying()) _cleanTween.Pause();
         if (!_backTween.IsPlaying())
         {
-            _backTween = transform.DOMoveZ(0.65f, 0.25f).OnComplete((() => { _playerState = State.Idle; }))
+            _backTween = transform.DOMoveZ(firstZaxis, 0.25f).OnComplete((() => { _playerState = State.Idle; }))
                 .SetAutoKill(false)
                 .SetEase(Ease.OutSine);
             _backTween.Play();
