@@ -1,15 +1,17 @@
 
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SkillCheck : MonoBehaviour
 {
     public RectTransform indicator;
     public RectTransform successArea;
     public GameObject SkillCheckParent;
-    public int skillChecksDone,checkSpeed,checksSuccesfullyDone;
-    public int ymin, ymax,indcymin,indcymax;
-    public bool checkFinished,upDown = true,checkUseable = true;
+    public int skillChecksDone,checksSuccesfullyDone;
+    public int checkSpeed;
+    public int indcymin,indcymax;
+    private bool checkFinished,upDown = true,checkUseable = true;
 
     private void Start()
     {
@@ -37,8 +39,6 @@ public class SkillCheck : MonoBehaviour
 
     private void OpenSkillCheckPanel()
     {
-        
-        Debug.Log("sa açılsana");
         skillChecksDone = -1;
         checkUseable = true;
         upDown = true;
@@ -51,7 +51,9 @@ public class SkillCheck : MonoBehaviour
     {
         if (indicator.anchoredPosition.y >= indcymax) //220
         {
-            successArea.anchoredPosition = new Vector2(successArea.anchoredPosition.x, ymax); //-180
+            //successArea.anchoredPosition = new Vector2(successArea.anchoredPosition.x, ymax); //-180
+            successArea.anchoredPosition = new Vector2(successArea.anchoredPosition.x, Random.Range(-90,-190));
+            RandomizeSkillCheckHeight();
             upDown = false;  
             checkUseable = true;
             if (!checkFinished)
@@ -62,7 +64,9 @@ public class SkillCheck : MonoBehaviour
         }
         else if (indicator.anchoredPosition.y <= indcymin) //-10
         {
-            successArea.anchoredPosition = new Vector2(successArea.anchoredPosition.x, ymin); //-10
+            //successArea.anchoredPosition = new Vector2(successArea.anchoredPosition.x, ymin); //-10
+            successArea.anchoredPosition = new Vector2(successArea.anchoredPosition.x, Random.Range(90,190));
+            RandomizeSkillCheckHeight();
             upDown = true;  
             checkUseable = true;
             if (!checkFinished)
@@ -109,6 +113,13 @@ public class SkillCheck : MonoBehaviour
         
     }
 
+    public void RandomizeSkillCheckHeight()
+    {
+        float heightSucces = Random.Range(26, 35);
+        successArea.sizeDelta = new Vector2(successArea.sizeDelta.x, heightSucces); 
+    }
+    
+    
     private bool IsIndicatorInSuccessArea()
     {
         return RectTransformUtility.RectangleContainsScreenPoint(successArea, indicator.position);
