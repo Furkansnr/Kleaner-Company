@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public Action<float> DecreaseHealthAction;
     public Action SpongeFilled;
     public Action SkillCheckAppears;
+    public Action<int> SkillCheckSuccesfull;
 
     private void Awake()
     {
@@ -46,6 +47,8 @@ public class GameManager : MonoBehaviour
     public void EmitSpongeFilled() => SpongeFilled?.Invoke();
 
     public void OpenSkillCheckPanelManager() => SkillCheckAppears?.Invoke();
+
+    public void EmitSkillCheckSuccessfull(int value) => SkillCheckSuccesfull?.Invoke(value);
     
     void EmitScoreAction(int score)
     {

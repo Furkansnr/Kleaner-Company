@@ -601,6 +601,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 7590565240624004221}
   fillAmount: {fileID: 7590565241747471450}
+  bucketUI: {fileID: 7590565241110382218}
 --- !u!1001 &4594014126529797281
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -666,6 +667,31 @@ PrefabInstance:
     - target: {fileID: 1613237198495402966, guid: ac8af77344900284284fc2fe5afb23a7,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1670323372998130452, guid: ac8af77344900284284fc2fe5afb23a7,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1670323372998130452, guid: ac8af77344900284284fc2fe5afb23a7,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1670323372998130452, guid: ac8af77344900284284fc2fe5afb23a7,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8588577682427844139, guid: ac8af77344900284284fc2fe5afb23a7,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8588577682427844139, guid: ac8af77344900284284fc2fe5afb23a7,
+        type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

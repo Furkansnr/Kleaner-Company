@@ -11,6 +11,7 @@ public class PlayerBrush : MonoBehaviour
         Idle,
         Clean,
         BackIdle,
+        Dirty,
         Empty
     }
 
@@ -20,11 +21,23 @@ public class PlayerBrush : MonoBehaviour
     [SerializeField] private State _playerState = State.Idle;
     [SerializeField] private float scaleFactor;
     [SerializeField] private float decreaseSpeed;
+    [SerializeField] private float cleanMaximumZaxis = 1f;
     [SerializeField] private ParticleSystem bubleParticle;
-    [SerializeField] private float firstZaxis;
-    [SerializeField] private float cleanZaxis;
+    private float firstZaxis;
+    private float cleanZaxis;
     private bool _backIdle;
     private float health = 100f;
+    private float waterBucketYaxis;
+    private Material spongeMaterial;
+    private Vector3 backIdlePos;
+
+    private void Awake()
+    {
+        spongeMaterial = GetComponent<Renderer>().material;
+        firstZaxis = transform.position.z;
+        cleanZaxis = firstZaxis + cleanMaximumZaxis;
+        backIdlePos = new Vector3(transform.position.x, transform.position.y, firstZaxis);
+    }
 
 
     private void Start()
@@ -40,6 +53,8 @@ public class PlayerBrush : MonoBehaviour
         transform.position = new Vector3(transform.position.x, transform.position.y, firstZaxis);
 
         GameManager.instance.SpongeFilled += SpongeFilled;
+        GameManager.instance.DecreaseHealthAction += UpdateSpongeMaterial;
+        GameManager.instance.SkillCheckSuccesfull += SkillCheckSuccesfull;
     }
 
     void Update()
@@ -54,11 +69,11 @@ public class PlayerBrush : MonoBehaviour
         State newState = State.Empty;
         if (Input.GetMouseButtonDown(0) && _playerState == State.Idle)
             newState = State.Clean;
-
         if (Input.GetMouseButtonUp(0) && _playerState == State.Clean)
             newState = State.BackIdle;
-        if (_playerState == State.Clean && health <= 0)
-            newState = State.BackIdle;
+        if (_playerState != State.Dirty && health <= 0)
+            newState = State.Dirty;
+
         return newState;
     }
 
@@ -76,6 +91,12 @@ public class PlayerBrush : MonoBehaviour
             case State.BackIdle:
                 _playerState = state;
                 BubleActive(false);
+                break;
+            case State.Dirty:
+                if (_cleanTween.IsPlaying()) _cleanTween.Pause();
+                _playerState = state;
+                BubleActive(false);
+                DirtyState();
                 break;
         }
     }
@@ -104,11 +125,38 @@ public class PlayerBrush : MonoBehaviour
         if (_cleanTween.IsPlaying()) _cleanTween.Pause();
         if (!_backTween.IsPlaying())
         {
-            _backTween = transform.DOMoveZ(firstZaxis, 0.25f).OnComplete((() => { _playerState = State.Idle; }))
+            _backTween = transform.DOMove(backIdlePos, 0.25f).OnComplete((() => { _playerState = State.Idle; }))
                 .SetAutoKill(false)
                 .SetEase(Ease.OutSine);
             _backTween.Play();
         }
+    }
+
+    private void DirtyState()
+    {
+        if (health >= 0) return;
+        Vector3 newPos = ObjectMaker.instance.SpawnWaterBucket(new Vector3(
+            transform.position.x, transform.position.y, cleanZaxis - 0.35f));
+        transform.DOMove(newPos, 0.5f);
+        waterBucketYaxis = ObjectMaker.instance.GetWaterBucketYAxis();
+    }
+
+    private void SkillCheckSuccesfull(int value)
+    {
+        Sequence q = DOTween.Sequence().SetLoops(2,LoopType.Yoyo)
+            .OnComplete((() =>
+            {
+                if (value != 5)
+                    _playerState = State.Dirty;
+                else
+                    _playerState = State.BackIdle;
+            }));;
+        q.Append(transform.DOMoveY(waterBucketYaxis, 0.5f));
+        q.Join(transform.DOScale(transform.localScale / 2, 0.5f));
+        float currentDirtPower = spongeMaterial.GetFloat("_dirt_power");
+        DOTween.To(() => currentDirtPower, x => currentDirtPower = x, currentDirtPower - 0.2f
+                , 0.25f)
+            .OnUpdate((() => { spongeMaterial.SetFloat("_dirt_power", currentDirtPower); }));
     }
 
 
@@ -118,15 +166,21 @@ public class PlayerBrush : MonoBehaviour
         GameManager.instance.EmitDecreaseHealthAction(health / 100);
         if (health <= 1)
         {
-          GameManager.instance.OpenSkillCheckPanelManager();
+            GameManager.instance.OpenSkillCheckPanelManager();
         }
     }
 
-    private void SpongeFilled() => health = 100;
+    private void SpongeFilled()
+    {
+        health = 100;
+        spongeMaterial.SetFloat("_dirt_power", 0);
+    }
 
     private void BubleActive(bool active)
     {
-        if(active) bubleParticle.Play();
+        if (active) bubleParticle.Play();
         else bubleParticle.Stop();
     }
+
+    private void UpdateSpongeMaterial(float value) => spongeMaterial.SetFloat("_dirt_power", 1 - value);
 }

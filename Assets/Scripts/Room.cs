@@ -18,7 +18,6 @@ public class Room : MonoBehaviour
     {
         if (other.CompareTag("Ground"))
         {
-            print("here");
             building.ResetRoomPosition(transform);
         }
     }

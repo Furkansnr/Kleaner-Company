@@ -1,6 +1,7 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SkillCheck : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class SkillCheck : MonoBehaviour
     public int skillChecksDone,checkSpeed,checksSuccesfullyDone;
     public int ymin, ymax,indcymin,indcymax;
     public bool checkFinished,upDown = true,checkUseable = true;
+    [SerializeField] private Slider slider;
 
     private void Start()
     {
@@ -93,10 +95,13 @@ public class SkillCheck : MonoBehaviour
             {
                 Debug.Log("Başarılı!");
                 checksSuccesfullyDone++;
+                slider.value = checksSuccesfullyDone;
+                GameManager.instance.EmitSkillCheckSuccessfull(checksSuccesfullyDone);
                 if (checksSuccesfullyDone >= 5)
                 {
                     GameManager.instance.EmitSpongeFilled();
                     checksSuccesfullyDone = 0;
+                    slider.value = checksSuccesfullyDone;
                     CloseSkillCheckPanel();
                 }
             }
