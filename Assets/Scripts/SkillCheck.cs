@@ -1,7 +1,7 @@
-
-using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 using UnityEngine.UI;
+
 
 public class SkillCheck : MonoBehaviour
 {
@@ -56,6 +56,8 @@ public class SkillCheck : MonoBehaviour
             successArea.anchoredPosition = new Vector2(successArea.anchoredPosition.x, ymax); //-180
             upDown = false;  
             checkUseable = true;
+            successArea.anchoredPosition = new Vector2(successArea.anchoredPosition.x, Random.Range(-90,-190));
+            RandomizeSkillCheckHeight();
             if (!checkFinished)
             {
                 skillChecksDone++;   
@@ -67,6 +69,8 @@ public class SkillCheck : MonoBehaviour
             successArea.anchoredPosition = new Vector2(successArea.anchoredPosition.x, ymin); //-10
             upDown = true;  
             checkUseable = true;
+            successArea.anchoredPosition = new Vector2(successArea.anchoredPosition.x, Random.Range(90,190));
+            RandomizeSkillCheckHeight();
             if (!checkFinished)
             {
                 skillChecksDone++;   
@@ -112,6 +116,12 @@ public class SkillCheck : MonoBehaviour
             
         }
         
+    }
+    
+    public void RandomizeSkillCheckHeight()
+    {
+        float heightSucces = Random.Range(26, 35);
+        successArea.sizeDelta = new Vector2(successArea.sizeDelta.x, heightSucces); 
     }
 
     private bool IsIndicatorInSuccessArea()
