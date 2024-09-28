@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.UI;
@@ -23,7 +24,6 @@ public class SkillCheck : MonoBehaviour
     {
         MoveIndicator();
         CheckSkill();
-        //CloseSkillCheckPanel();
     }
 
     private void CloseSkillCheckPanel()
@@ -39,8 +39,6 @@ public class SkillCheck : MonoBehaviour
 
     private void OpenSkillCheckPanel()
     {
-        
-        Debug.Log("sa açılsana");
         skillChecksDone = -1;
         checkUseable = true;
         upDown = true;
@@ -53,9 +51,7 @@ public class SkillCheck : MonoBehaviour
     {
         if (indicator.anchoredPosition.y >= indcymax) //220
         {
-            successArea.anchoredPosition = new Vector2(successArea.anchoredPosition.x, ymax); //-180
-            upDown = false;  
-            checkUseable = true;
+            upDown = false;
             successArea.anchoredPosition = new Vector2(successArea.anchoredPosition.x, Random.Range(-90,-190));
             RandomizeSkillCheckHeight();
             if (!checkFinished)
@@ -66,9 +62,7 @@ public class SkillCheck : MonoBehaviour
         }
         else if (indicator.anchoredPosition.y <= indcymin) //-10
         {
-            successArea.anchoredPosition = new Vector2(successArea.anchoredPosition.x, ymin); //-10
-            upDown = true;  
-            checkUseable = true;
+            upDown = true;
             successArea.anchoredPosition = new Vector2(successArea.anchoredPosition.x, Random.Range(90,190));
             RandomizeSkillCheckHeight();
             if (!checkFinished)
@@ -92,12 +86,12 @@ public class SkillCheck : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && checkUseable)
         {
-            checkUseable = false;
             checkFinished = true;
             skillChecksDone++;
             if (IsIndicatorInSuccessArea())
             {
                 Debug.Log("Başarılı!");
+                StartCoroutine(SkillCheckDelay(1.1f));
                 checksSuccesfullyDone++;
                 slider.value = checksSuccesfullyDone;
                 GameManager.instance.EmitSkillCheckSuccessfull(checksSuccesfullyDone);
@@ -111,11 +105,19 @@ public class SkillCheck : MonoBehaviour
             }
             else
             {
+                StartCoroutine(SkillCheckDelay(0.5f));
                 Debug.Log("Başarısız!");
             }
             
         }
         
+    }
+
+    public IEnumerator SkillCheckDelay(float delayTime)
+    {
+        checkUseable = false;
+        yield return new WaitForSeconds(delayTime);
+        checkUseable = true;
     }
     
     public void RandomizeSkillCheckHeight()
