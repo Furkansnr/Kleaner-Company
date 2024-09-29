@@ -2069,11 +2069,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1613237199118439407, guid: ac8af77344900284284fc2fe5afb23a7,
         type: 3}
-      propertyPath: checkSpeed
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 1613237199118439407, guid: ac8af77344900284284fc2fe5afb23a7,
-        type: 3}
       propertyPath: playerIDType
       value: 3
       objectReference: {fileID: 0}
@@ -2619,11 +2614,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1613237199118439407, guid: ac8af77344900284284fc2fe5afb23a7,
-        type: 3}
-      propertyPath: checkSpeed
-      value: 300
-      objectReference: {fileID: 0}
     - target: {fileID: 1670323372998130452, guid: ac8af77344900284284fc2fe5afb23a7,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -2728,11 +2718,6 @@ PrefabInstance:
         type: 3}
       propertyPath: playerID
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1613237199118439407, guid: ac8af77344900284284fc2fe5afb23a7,
-        type: 3}
-      propertyPath: checkSpeed
-      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 1613237199118439407, guid: ac8af77344900284284fc2fe5afb23a7,
         type: 3}
@@ -3069,11 +3054,6 @@ PrefabInstance:
         type: 3}
       propertyPath: playerID
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1613237199118439407, guid: ac8af77344900284284fc2fe5afb23a7,
-        type: 3}
-      propertyPath: checkSpeed
-      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 1613237199118439407, guid: ac8af77344900284284fc2fe5afb23a7,
         type: 3}

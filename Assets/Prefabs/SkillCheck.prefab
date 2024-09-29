@@ -204,7 +204,7 @@ MonoBehaviour:
   successArea: {fileID: 1613237199280746417}
   SkillCheckParent: {fileID: 1613237198495402965}
   skillChecksDone: -1
-  checkSpeed: 200
+  checkSpeed: 100
   checksSuccesfullyDone: 0
   ymin: 190
   ymax: -190
