@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerBrush : MonoBehaviour
 {
@@ -31,7 +32,6 @@ public class PlayerBrush : MonoBehaviour
     private float waterBucketYaxis;
     private Material spongeMaterial;
     private Vector3 backIdlePos;
-
     private void Awake()
     {
         spongeMaterial = GetComponent<Renderer>().material;
@@ -91,7 +91,7 @@ public class PlayerBrush : MonoBehaviour
     private State GetState()
     {
         State newState = State.Empty;
-        if (Input.GetMouseButtonDown(0) && _playerState == State.Idle)
+        if ( Input.GetMouseButtonDown(0) &&_playerState == State.Idle)
             newState = State.Clean;
         if (Input.GetMouseButtonUp(0) && _playerState == State.Clean)
             newState = State.BackIdle;
@@ -205,6 +205,7 @@ public class PlayerBrush : MonoBehaviour
         if (this.playerID != playerID) return;
         health = 100;
         spongeMaterial.SetFloat("_dirt_power", 0);
+        print(playerID);
     }
 
     private void BubleActive(bool active)

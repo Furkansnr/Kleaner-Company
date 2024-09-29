@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameData : MonoBehaviour
 {
-    private int playersCount = 2;
+    private int playersCount = 4;
     [HideInInspector] public string[] playerIDs = { "Player1", "Player2", "Player3", "Player4" };
     public Sprite[] playersSprite;
     public static GameData instance;
