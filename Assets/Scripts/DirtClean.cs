@@ -14,6 +14,7 @@ public class DirtClean : MonoBehaviour
     private Texture2D _templateDirtMaskClone;
 
     private Material _material;
+    private string playerID="";
 
     private void Awake()
     {
@@ -48,10 +49,11 @@ public class DirtClean : MonoBehaviour
     }
 
 
-    public void Clean(RaycastHit hit, float scalefactor)
+    public void Clean(RaycastHit hit, float scalefactor, string playerID)
     {
         Vector2 textureCoord = hit.textureCoord;
         _scaleFactor = scalefactor;
+        this.playerID = playerID;
 
         int pixelX = (int)(textureCoord.x * dirtMaskBase.width);
         int pixelY = (int)((textureCoord.y) * dirtMaskBase.height);
@@ -110,7 +112,7 @@ public class DirtClean : MonoBehaviour
     {
         if (other.CompareTag("Ground"))
         {
-           GameManager.instance.CalculateScore(dirtAmountTotal - cleanAmountTotal);
+           GameManager.instance.CalculateScore(playerID,dirtAmountTotal - cleanAmountTotal);
         }
     }
 }

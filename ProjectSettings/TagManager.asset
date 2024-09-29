@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - PlayerSprite
+  - FillAmount
+  - ScoreText
   layers:
   - Default
   - TransparentFX

@@ -19,7 +19,7 @@ public class ObjectMaker : MonoBehaviour
     }
 
 
-    public Vector3 SpawnWaterBucket(Vector3 spongePos)
+    public Vector3 SpawnWaterBucket(Vector3 spongePos, string playerID)
     {
         waterBucket = Instantiate(waterBucketPrefab);
         waterBucket.transform.position = new Vector3(spongePos.x,
@@ -31,6 +31,7 @@ public class ObjectMaker : MonoBehaviour
             SetEase(Ease.InOutQuad)
             .From();
         waterBucketYAxis = waterBucket.transform.position.y;
+        waterBucket.GetComponent<WaterBucket>().SetupWaterBucket(playerID);
         return newPos;
     }
 

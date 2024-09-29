@@ -8,6 +8,7 @@ public class WaterBucket : MonoBehaviour
 {
     [SerializeField] private ParticleSystem waterParticle;
     [SerializeField] private ParticleSystem succesfullParticle;
+    private string playerID;
 
     private void OnEnable()
     {
@@ -17,12 +18,17 @@ public class WaterBucket : MonoBehaviour
     private void OnDisable()
     {
         GameManager.instance.SkillCheckSuccesfull -= DestroyWaterBucket;
+    }
 
+    public void SetupWaterBucket(string playerID)
+    {
+        this.playerID = playerID;
     }
 
 
-    private void DestroyWaterBucket(int value)
+    private void DestroyWaterBucket(string playerID, int value)
     {
+        if(this.playerID!=playerID) return;
         succesfullParticle.Play();
         if (value == 5)
         {

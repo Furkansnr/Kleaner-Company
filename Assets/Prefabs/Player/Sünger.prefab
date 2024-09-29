@@ -4994,8 +4994,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _playerState: 0
-  scaleFactor: 1
+  scaleFactor: 1.13
   decreaseSpeed: 5
+  cleanMaximumZaxis: 1
   bubleParticle: {fileID: 1222032816}
-  firstZaxis: 0
-  cleanZaxis: 0

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Sponge
+  m_Name: Sponge 2
   m_Shader: {fileID: -6465566751694194690, guid: 685d23531fff964489e10be3dd8028b6,
     type: 3}
   m_ValidKeywords: []
@@ -46,7 +46,7 @@ Material:
     - _dirt_strenght: 0.5
     - _dirt_strength: 0
     m_Colors:
-    - _base_color: {r: 0.7568628, g: 0.7450981, b: 0.19215685, a: 0}
+    - _base_color: {r: 0.17493767, g: 0.7924528, b: 0.23930167, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6405022815563378153
 MonoBehaviour:

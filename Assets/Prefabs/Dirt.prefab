@@ -111,8 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87aaa099f365a4848a2659ed34e01d35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dirtMaskBase: {fileID: 2800000, guid: 3030e2dd907b4e6409cbf639f87564f9, type: 3}
+  dirtMaskBase: {fileID: 2800000, guid: 5f0116e664d64d94e934f3090f8cbf29, type: 3}
   brush: {fileID: 2800000, guid: d3e7e754acd15c34a91cec1a07c5ed31, type: 3}
-  scaleFactor: 3
   dirtAmountTotal: 0
   cleanAmountTotal: 0

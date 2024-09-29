@@ -23,6 +23,7 @@ public class PlayerBrush : MonoBehaviour
     [SerializeField] private float decreaseSpeed;
     [SerializeField] private float cleanMaximumZaxis = 1f;
     [SerializeField] private ParticleSystem bubleParticle;
+    private string playerID;
     private float firstZaxis;
     private float cleanZaxis;
     private bool _backIdle;
@@ -37,6 +38,7 @@ public class PlayerBrush : MonoBehaviour
         firstZaxis = transform.position.z;
         cleanZaxis = firstZaxis + cleanMaximumZaxis;
         backIdlePos = new Vector3(transform.position.x, transform.position.y, firstZaxis);
+        playerID = GetPlayerID();
     }
 
 
@@ -51,10 +53,18 @@ public class PlayerBrush : MonoBehaviour
             .SetEase(Ease.OutSine);
         _backTween.Pause();
         transform.position = new Vector3(transform.position.x, transform.position.y, firstZaxis);
+    }
 
+    private void OnEnable()
+    {
         GameManager.instance.SpongeFilled += SpongeFilled;
         GameManager.instance.DecreaseHealthAction += UpdateSpongeMaterial;
-        GameManager.instance.SkillCheckSuccesfull += SkillCheckSuccesfull;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.instance.SpongeFilled -= SpongeFilled;
+        GameManager.instance.DecreaseHealthAction -= UpdateSpongeMaterial;
     }
 
     void Update()
@@ -62,6 +72,20 @@ public class PlayerBrush : MonoBehaviour
         SetState(GetState());
         CleanState();
         BackIdleState();
+    }
+
+    private string GetPlayerID()
+    {
+        string playerid = "";
+        for (int i = 0; i < transform.parent.childCount; i++)
+        {
+            if (gameObject == transform.parent.GetChild(i).gameObject)
+            {
+                playerid = GameData.instance.playerIDs[i];
+            }
+        }
+
+        return playerid;
     }
 
     private State GetState()
@@ -115,7 +139,7 @@ public class PlayerBrush : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 10f,
                 dirtLayer))
         {
-            hit.collider.GetComponent<DirtClean>().Clean(hit, scaleFactor);
+            hit.collider.GetComponent<DirtClean>().Clean(hit, scaleFactor, playerID);
         }
     }
 
@@ -134,23 +158,29 @@ public class PlayerBrush : MonoBehaviour
 
     private void DirtyState()
     {
+        GameManager.instance.SkillCheckSuccesfull += SkillCheckSuccesfull;
         if (health >= 0) return;
         Vector3 newPos = ObjectMaker.instance.SpawnWaterBucket(new Vector3(
-            transform.position.x, transform.position.y, cleanZaxis - 0.35f));
+            transform.position.x, transform.position.y, cleanZaxis - 0.35f),playerID);
         transform.DOMove(newPos, 0.5f);
         waterBucketYaxis = ObjectMaker.instance.GetWaterBucketYAxis();
     }
 
-    private void SkillCheckSuccesfull(int value)
+    private void SkillCheckSuccesfull(string playerID, int value)
     {
-        Sequence q = DOTween.Sequence().SetLoops(2,LoopType.Yoyo)
+        if (this.playerID != playerID) return;
+        Sequence q = DOTween.Sequence().SetLoops(2, LoopType.Yoyo)
             .OnComplete((() =>
             {
                 if (value != 5)
                     _playerState = State.Dirty;
                 else
+                {
                     _playerState = State.BackIdle;
-            }));;
+                    GameManager.instance.SkillCheckSuccesfull -= SkillCheckSuccesfull;
+                }
+            }));
+        ;
         q.Append(transform.DOMoveY(waterBucketYaxis, 0.5f));
         q.Join(transform.DOScale(transform.localScale / 2, 0.5f));
         float currentDirtPower = spongeMaterial.GetFloat("_dirt_power");
@@ -163,15 +193,16 @@ public class PlayerBrush : MonoBehaviour
     private void DecreaseHealth()
     {
         health -= Time.deltaTime * decreaseSpeed;
-        GameManager.instance.EmitDecreaseHealthAction(health / 100);
-        if (health <= 1)
+        GameManager.instance.EmitDecreaseHealthAction(playerID, health / 100);
+        if (health <= 0)
         {
-            GameManager.instance.OpenSkillCheckPanelManager();
+            GameManager.instance.OpenSkillCheckPanelManager(playerID);
         }
     }
 
-    private void SpongeFilled()
+    private void SpongeFilled(string playerID)
     {
+        if (this.playerID != playerID) return;
         health = 100;
         spongeMaterial.SetFloat("_dirt_power", 0);
     }
@@ -182,5 +213,9 @@ public class PlayerBrush : MonoBehaviour
         else bubleParticle.Stop();
     }
 
-    private void UpdateSpongeMaterial(float value) => spongeMaterial.SetFloat("_dirt_power", 1 - value);
+    private void UpdateSpongeMaterial(string playerID, float value)
+    {
+        if (this.playerID == playerID)
+            spongeMaterial.SetFloat("_dirt_power", 1 - value);
+    }
 }
