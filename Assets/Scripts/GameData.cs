@@ -8,6 +8,7 @@ public class GameData : MonoBehaviour
     private int playersCount = 4;
     [HideInInspector] public string[] playerIDs = { "Player1", "Player2", "Player3", "Player4" };
     public Sprite[] playersSprite;
+    public KeyCode[] playerKeyCode;
     public static GameData instance;
 
     private void Awake()

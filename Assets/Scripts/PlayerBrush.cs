@@ -32,6 +32,7 @@ public class PlayerBrush : MonoBehaviour
     private float waterBucketYaxis;
     private Material spongeMaterial;
     private Vector3 backIdlePos;
+    private KeyCode cleanKeyCode;
     private void Awake()
     {
         spongeMaterial = GetComponent<Renderer>().material;
@@ -39,6 +40,7 @@ public class PlayerBrush : MonoBehaviour
         cleanZaxis = firstZaxis + cleanMaximumZaxis;
         backIdlePos = new Vector3(transform.position.x, transform.position.y, firstZaxis);
         playerID = GetPlayerID();
+        cleanKeyCode = GetPlayerCleanKeyCode();
     }
 
 
@@ -59,12 +61,21 @@ public class PlayerBrush : MonoBehaviour
     {
         GameManager.instance.SpongeFilled += SpongeFilled;
         GameManager.instance.DecreaseHealthAction += UpdateSpongeMaterial;
+        GameManager.instance.GameEnd += GameEnd;
     }
 
     private void OnDisable()
     {
         GameManager.instance.SpongeFilled -= SpongeFilled;
         GameManager.instance.DecreaseHealthAction -= UpdateSpongeMaterial;
+        GameManager.instance.GameEnd -= GameEnd;
+        if (IsMethodInAction(GameManager.instance.SkillCheckSuccesfull, nameof(SkillCheckSuccesfull)))
+            GameManager.instance.SkillCheckSuccesfull -= SkillCheckSuccesfull;
+        if (_cleanTween.IsPlaying())
+        {
+            BubleActive(false);
+            _cleanTween.Kill();
+        }
     }
 
     void Update()
@@ -72,6 +83,22 @@ public class PlayerBrush : MonoBehaviour
         SetState(GetState());
         CleanState();
         BackIdleState();
+    }
+
+    private bool IsMethodInAction(Action<string,int> action, string methodName)
+    {
+        if (action == null)
+            return false;
+
+        foreach (var del in action.GetInvocationList())
+        {
+            if (del.Method.Name == methodName)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private string GetPlayerID()
@@ -87,13 +114,26 @@ public class PlayerBrush : MonoBehaviour
 
         return playerid;
     }
+    private KeyCode GetPlayerCleanKeyCode()
+    {
+        KeyCode playerKeyCode = KeyCode.A;
+        for (int i = 0; i <GameData.instance.playerKeyCode.Length; i++)
+        {
+            if (playerID==GameData.instance.playerIDs[i])
+            {
+                playerKeyCode = GameData.instance.playerKeyCode[i];
+            }
+        }
+
+        return playerKeyCode;
+    }
 
     private State GetState()
     {
         State newState = State.Empty;
-        if ( Input.GetMouseButtonDown(0) &&_playerState == State.Idle)
+        if ( Input.GetKeyDown(cleanKeyCode) &&_playerState == State.Idle)
             newState = State.Clean;
-        if (Input.GetMouseButtonUp(0) && _playerState == State.Clean)
+        if (Input.GetKeyUp(cleanKeyCode) && _playerState == State.Clean)
             newState = State.BackIdle;
         if (_playerState != State.Dirty && health <= 0)
             newState = State.Dirty;
@@ -205,7 +245,6 @@ public class PlayerBrush : MonoBehaviour
         if (this.playerID != playerID) return;
         health = 100;
         spongeMaterial.SetFloat("_dirt_power", 0);
-        print(playerID);
     }
 
     private void BubleActive(bool active)
@@ -218,5 +257,10 @@ public class PlayerBrush : MonoBehaviour
     {
         if (this.playerID == playerID)
             spongeMaterial.SetFloat("_dirt_power", 1 - value);
+    }
+
+    private void GameEnd()
+    {
+        Destroy(this);
     }
 }

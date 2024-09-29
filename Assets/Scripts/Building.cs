@@ -12,6 +12,18 @@ public class Building : MonoBehaviour
     private int[] spawnChances={ 50, 50, 50, 50 };
 
 
+    private void OnEnable()
+    {
+        GameManager.instance.GameEnd+=GameEnd;
+    }
+    
+    private void OnDisable()
+    {
+        GameManager.instance.GameEnd-=GameEnd;
+    }
+
+
+
     private void Update()
     {
         transform.position += new Vector3(0, -speed * Time.deltaTime, 0);
@@ -58,5 +70,10 @@ public class Building : MonoBehaviour
         {
             spawnChances[i] += 20;
         }
+    }
+
+    private void GameEnd()
+    {
+        Destroy(this);
     }
 }

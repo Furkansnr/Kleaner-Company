@@ -15,16 +15,19 @@ public class SkillCheck : MonoBehaviour
     public bool checkFinished, upDown = true, checkUseable = true;
     private string playerID;
     public Image fillImage;
+    private KeyCode keyCode;
 
 
     private void OnEnable()
     {
         GameManager.instance.SkillCheckAppears += OpenSkillCheckPanel;
+        GameManager.instance.GameEnd += CloseSkillCheckPanel;
     }
 
     private void OnDestroy()
     {
         GameManager.instance.SkillCheckAppears -= OpenSkillCheckPanel;
+        GameManager.instance.GameEnd -= CloseSkillCheckPanel;
     }
 
     private void Start()
@@ -39,7 +42,11 @@ public class SkillCheck : MonoBehaviour
         CheckSkill();
     }
 
-    public void SetPlayerID(string playerID) => this.playerID = playerID;
+    public void SetupSkillCheck(string playerID, KeyCode keyCode)
+    {
+        this.playerID = playerID;
+        this.keyCode = keyCode;
+    } 
 
     private void CloseSkillCheckPanel()
     {
@@ -112,7 +119,7 @@ public class SkillCheck : MonoBehaviour
 
     private void CheckSkill()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && checkUseable)
+        if (Input.GetKeyDown(keyCode) && checkUseable)
         {
             checkFinished = true;
             skillChecksDone++;

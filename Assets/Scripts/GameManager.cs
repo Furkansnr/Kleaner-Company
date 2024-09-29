@@ -6,14 +6,18 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    private int[] playerScores={0,0,0,0};
+    private int[] playerScores = { 0, 0, 0, 0 };
     private string[] playerIDs;
+    private float gameTimer = 60f;
+    private bool isGameEnd;
     public Action<string, int> ScoreAction;
     public Action<string, float> DecreaseHealthAction;
     public Action<string> SpongeFilled;
-    public Action <string> SkillCheckAppears;
+    public Action<string> SkillCheckAppears;
     public Action<string, int> SkillCheckSuccesfull;
     public Action<int> PlayersAction;
+    public Action<float> DecreaseTimerAction;
+    public Action GameEnd;
 
     private void Awake()
     {
@@ -24,6 +28,11 @@ public class GameManager : MonoBehaviour
     {
         EmitPlayersAction(GameData.instance.GetPlayersCount());
         playerIDs = GameData.instance.playerIDs;
+    }
+
+    private void Update()
+    {
+        DecreaseTimer();
     }
 
     public void CalculateScore(string playerID, int value)
@@ -52,13 +61,15 @@ public class GameManager : MonoBehaviour
         EmitScoreAction(playerID, tScore);
     }
 
-    public void EmitDecreaseHealthAction(string playerID ,float value) => DecreaseHealthAction?.Invoke(playerID ,value);
+    public void EmitDecreaseHealthAction(string playerID, float value) => DecreaseHealthAction?.Invoke(playerID, value);
 
     public void EmitSpongeFilled(string playerID) => SpongeFilled?.Invoke(playerID);
 
     public void OpenSkillCheckPanelManager(string playerID) => SkillCheckAppears?.Invoke(playerID);
 
     public void EmitSkillCheckSuccessfull(string playerID, int value) => SkillCheckSuccesfull?.Invoke(playerID, value);
+
+    public int[] GetPlayerScores() => playerScores;
 
     void EmitScoreAction(string playerID, int score)
     {
@@ -72,9 +83,27 @@ public class GameManager : MonoBehaviour
                 break;
             }
         }
+
         totalscore += score;
         ScoreAction?.Invoke(playerID, totalscore);
     }
 
     private void EmitPlayersAction(int value) => PlayersAction?.Invoke(value);
+
+    private void EmitGameEnd()
+    {
+        isGameEnd = true;
+        GameEnd?.Invoke();
+    }
+
+    private void DecreaseTimer()
+    {
+        if (gameTimer <= 0)
+        {
+            if(!isGameEnd) EmitGameEnd();
+            return;
+        }
+        gameTimer -= Time.deltaTime;
+        DecreaseTimerAction?.Invoke(gameTimer);
+    }
 }

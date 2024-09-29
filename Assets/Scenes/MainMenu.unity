@@ -3237,6 +3237,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a829bc3eb49af9c4faa0eb427d225ecb, type: 3}
   - {fileID: 21300000, guid: f52743c9d2ae9c847a93fb65715f2c32, type: 3}
   - {fileID: 21300000, guid: d42f82e557ccb904bb04b1c1092e2773, type: 3}
+  playerKeyCode: 61000000730000006400000066000000
 --- !u!4 &1476075428
 Transform:
   m_ObjectHideFlags: 0

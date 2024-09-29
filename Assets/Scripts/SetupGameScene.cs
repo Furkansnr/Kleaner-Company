@@ -49,10 +49,11 @@ public class SetupGameScene : MonoBehaviour
     private void SetupSkillChecks(int value)
     {
         string[] playerIDs = GameData.instance.playerIDs;
+        KeyCode[] playersKeyCode = GameData.instance.playerKeyCode;
 
         for (int i = 0; i < value; i++)
         {
-            skillChecks[i].GetComponentInChildren<SkillCheck>().SetPlayerID(playerIDs[i]);
+            skillChecks[i].GetComponentInChildren<SkillCheck>().SetupSkillCheck(playerIDs[i],playersKeyCode[i]);
         }
         for (int i = value; i < skillChecks.Length; i++)
         {
