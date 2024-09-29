@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerBrush : MonoBehaviour
 {
@@ -30,13 +31,14 @@ public class PlayerBrush : MonoBehaviour
     private float waterBucketYaxis;
     private Material spongeMaterial;
     private Vector3 backIdlePos;
-
+    private bool isBrushing = false; // yeni ekledim basıp basmadığını anlamak için eklendi.
     private void Awake()
     {
         spongeMaterial = GetComponent<Renderer>().material;
         firstZaxis = transform.position.z;
         cleanZaxis = firstZaxis + cleanMaximumZaxis;
         backIdlePos = new Vector3(transform.position.x, transform.position.y, firstZaxis);
+        
     }
 
 
@@ -67,9 +69,9 @@ public class PlayerBrush : MonoBehaviour
     private State GetState()
     {
         State newState = State.Empty;
-        if (Input.GetMouseButtonDown(0) && _playerState == State.Idle)
+        if (isBrushing && _playerState == State.Idle)
             newState = State.Clean;
-        if (Input.GetMouseButtonUp(0) && _playerState == State.Clean)
+        if (!isBrushing && _playerState == State.Clean)
             newState = State.BackIdle;
         if (_playerState != State.Dirty && health <= 0)
             newState = State.Dirty;
@@ -77,6 +79,26 @@ public class PlayerBrush : MonoBehaviour
         return newState;
     }
 
+    private void OnBrush(InputValue context)
+    {
+        Debug.Log(context.isPressed);
+        if(context.isPressed)
+         {
+             isBrushing = true;
+         }
+         else
+         {
+             isBrushing = false;
+         }
+    }
+
+    
+     // public bool IsBrushing(bool isBrushed)
+     // {
+     //     isBrushed = isBrushing;
+     //     return isBrushing; 
+     // }
+    
     private void SetState(State state)
     {
         if (_playerState == state || state == State.Empty) return;

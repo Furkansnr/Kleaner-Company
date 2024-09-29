@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.UI;
-
+using DG.Tweening;
 
 public class SkillCheck : MonoBehaviour
 {
@@ -13,10 +13,12 @@ public class SkillCheck : MonoBehaviour
     public int ymin, ymax,indcymin,indcymax;
     public bool checkFinished,upDown = true,checkUseable = true;
     [SerializeField] private Slider slider;
+    public Image fillImage;
 
     private void Start()
     {
         GameManager.instance.SkillCheckAppears += OpenSkillCheckPanel;
+        SkillCheckParent.transform.localScale = Vector3.zero;
         SkillCheckParent.SetActive(false);
     }
 
@@ -33,8 +35,9 @@ public class SkillCheck : MonoBehaviour
         checkUseable = true;
         upDown = true;
         indicator.anchoredPosition = new Vector2(indicator.anchoredPosition.x, -10);
-        SkillCheckParent.SetActive(false);
-        
+        //SkillCheckParent.SetActive(false);
+        SkillCheckParent.transform.DOScale(Vector3.zero, 0.7f).SetEase(Ease.OutExpo).
+            OnComplete(() => SkillCheckParent.SetActive(false));
     }
 
     private void OpenSkillCheckPanel()
@@ -44,7 +47,9 @@ public class SkillCheck : MonoBehaviour
         upDown = true;
         indicator.anchoredPosition = new Vector2(indicator.anchoredPosition.x, -10);
         SkillCheckParent.SetActive(true);
-        
+        SkillCheckParent.transform.DOScale(Vector3.one, 0.7f).SetEase(Ease.OutCirc);
+        //SkillCheckParent.transform.DOScale(Vector3.zero, 1f).From().SetEase(Ease.InBounce);
+
     }
     
     public void MoveIndicator()
@@ -93,11 +98,13 @@ public class SkillCheck : MonoBehaviour
                 Debug.Log("Başarılı!");
                 StartCoroutine(SkillCheckDelay(1.1f));
                 checksSuccesfullyDone++;
-                slider.value = checksSuccesfullyDone;
+                //slider.value = checksSuccesfullyDone;
+                fillImage.fillAmount = (float)checksSuccesfullyDone / 5f;
                 GameManager.instance.EmitSkillCheckSuccessfull(checksSuccesfullyDone);
                 if (checksSuccesfullyDone >= 5)
                 {
                     GameManager.instance.EmitSpongeFilled();
+                    fillImage.fillAmount = 0;
                     checksSuccesfullyDone = 0;
                     slider.value = checksSuccesfullyDone;
                     CloseSkillCheckPanel();
