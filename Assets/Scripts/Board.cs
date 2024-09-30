@@ -13,8 +13,8 @@ public class Board : MonoBehaviour
 
     private void Awake()
     {
-        playerImage = transform.GetChild(0).GetComponent<Image>();
-        playerScore = GetComponentInChildren<TextMeshProUGUI>();
+        playerImage = transform.GetChild(1).GetComponent<Image>();
+        playerScore = transform.GetChild(2).GetComponent<TextMeshProUGUI>();
     }
 
     public bool SetupBoard(Sprite playerImage, int playerScore)
