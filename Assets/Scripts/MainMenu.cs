@@ -9,17 +9,21 @@ public class MainMenu : MonoBehaviour
 {
     private float musicVolume;
     private float soundVolume;
+    private int tutorialPage;
 
     [SerializeField] private Button StartB;
     [SerializeField] private Button CreditsB;
     [SerializeField] private Button QuitB;
     [SerializeField] private Button SettingsB;
     [SerializeField] private Button TutorialB;
+    [SerializeField] private Button TutorialPageRB;
+    [SerializeField] private Button TutorialPageLB;
     [SerializeField] private Button[] BackB;
 
     [SerializeField] private GameObject CreditsP;
     [SerializeField] private GameObject SettingsP;
     [SerializeField] private GameObject TutorialP;
+    [SerializeField] private GameObject[] TutorialPagesP;
 
     [SerializeField] private AudioSource MusicAS;
     [SerializeField] private AudioSource SoundAS;
@@ -94,6 +98,30 @@ public class MainMenu : MonoBehaviour
     {
         TutorialP.SetActive(true);
         BackB[2].onClick.AddListener(() => BackButton(TutorialP, 2));
+    }
+
+    void TutorialPageRButton()
+    {
+        TutorialPagesP[tutorialPage].SetActive(false);
+        tutorialPage++;
+        TutorialPagesP[tutorialPage].SetActive(true);
+        if (tutorialPage>0)
+            TutorialPageLB.interactable = true;
+        else
+            TutorialPageLB.interactable = false;
+        
+    }
+
+    void TutorialPageLButton()
+    {
+        TutorialPagesP[tutorialPage].SetActive(false);
+        tutorialPage--;
+        TutorialPagesP[tutorialPage].SetActive(true);
+        if (tutorialPage>2)
+            TutorialPageRB.interactable = false;
+        else
+            TutorialPageLB.interactable = false;
+
     }
 
     void BackButton(GameObject closedPanel, int i)
