@@ -49,6 +49,8 @@ public class MainMenu : MonoBehaviour
         QuitB.onClick.AddListener(QuitButton);
         SettingsB.onClick.AddListener(SettingsButton);
         TutorialB.onClick.AddListener(TutorialButton);
+        TutorialPageRB.onClick.AddListener(TutorialPageRButton);
+        TutorialPageLB.onClick.AddListener(TutorialPageLButton);
 
         playerCount = 0;
         GameData.instance.SetPlayerCount(playerCount+1);
@@ -63,6 +65,8 @@ public class MainMenu : MonoBehaviour
         QuitB.onClick.RemoveAllListeners();
         SettingsB.onClick.RemoveAllListeners();
         TutorialB.onClick.RemoveAllListeners();
+        TutorialPageRB.onClick.RemoveAllListeners();
+        TutorialPageLB.onClick.RemoveAllListeners();
 
         musicVolume = PlayerPrefs.GetFloat("musicVolume", 100);
         soundVolume = PlayerPrefs.GetFloat("soundVolume", 100);
@@ -96,6 +100,14 @@ public class MainMenu : MonoBehaviour
 
     void TutorialButton()
     {
+        tutorialPage = 0;
+        for (int i = 0; i < TutorialPagesP.Length; i++)
+        {
+            TutorialPagesP[i].SetActive(false);
+        }
+        TutorialPagesP[0].SetActive(true);
+        TutorialPageLB.interactable = false;
+        TutorialPageRB.interactable = true;
         TutorialP.SetActive(true);
         BackB[2].onClick.AddListener(() => BackButton(TutorialP, 2));
     }
@@ -107,8 +119,8 @@ public class MainMenu : MonoBehaviour
         TutorialPagesP[tutorialPage].SetActive(true);
         if (tutorialPage>0)
             TutorialPageLB.interactable = true;
-        else
-            TutorialPageLB.interactable = false;
+        if (tutorialPage>2)
+            TutorialPageRB.interactable = false;
         
     }
 
@@ -117,9 +129,9 @@ public class MainMenu : MonoBehaviour
         TutorialPagesP[tutorialPage].SetActive(false);
         tutorialPage--;
         TutorialPagesP[tutorialPage].SetActive(true);
-        if (tutorialPage>2)
-            TutorialPageRB.interactable = false;
-        else
+        if (tutorialPage<3)
+            TutorialPageRB.interactable = true;
+        if (tutorialPage<1)
             TutorialPageLB.interactable = false;
 
     }
