@@ -107,10 +107,10 @@ public class UIManager : MonoBehaviour
                 panels[2].anchoredPosition = new Vector2(615, -488);
                 break;
             case 4:
-                panels[0].anchoredPosition = new Vector2(-668, -488);
-                panels[1].anchoredPosition = new Vector2(-238, -488);
-                panels[2].anchoredPosition = new Vector2(192, -488);
-                panels[3].anchoredPosition = new Vector2(622, -488);
+                panels[0].anchoredPosition = new Vector2(-710, -488);
+                panels[1].anchoredPosition = new Vector2(-250, -488);
+                panels[2].anchoredPosition = new Vector2(210, -488);
+                panels[3].anchoredPosition = new Vector2(660, -488);
                 break;
         }
     }
