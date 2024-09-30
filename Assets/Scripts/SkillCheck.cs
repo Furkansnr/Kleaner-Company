@@ -63,7 +63,7 @@ public class SkillCheck : MonoBehaviour
         upDown = true;
         indicator.anchoredPosition = new Vector2(indicator.anchoredPosition.x, -10);
         SkillCheckParent.SetActive(true);
-        SkillCheckParent.transform.DOScale(new Vector3(0.8f,0.8f,0.8f), 0.7f).SetEase(Ease.OutCirc);
+        SkillCheckParent.transform.DOScale(new Vector3(0.6f,0.6f,0.6f), 0.7f).SetEase(Ease.OutCirc);
         //SkillCheckParent.transform.DOScale(Vector3.zero, 1f).From().SetEase(Ease.InBounce);
     }
 

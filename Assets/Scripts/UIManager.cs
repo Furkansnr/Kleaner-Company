@@ -99,22 +99,22 @@ public class UIManager : MonoBehaviour
         switch (value)
         {
             case 1:
-                panels[0].anchoredPosition = new Vector2(-140, -488);
+                panels[0].anchoredPosition = new Vector2(-10, -480);
                 break;
             case 2:
-                panels[0].anchoredPosition = new Vector2(-400, -488);
-                panels[1].anchoredPosition = new Vector2(360, -488);
+                panels[0].anchoredPosition = new Vector2(-455, -480);
+                panels[1].anchoredPosition = new Vector2(550, -480);
                 break;
             case 3:
-                panels[0].anchoredPosition = new Vector2(-450, -488);
-                panels[1].anchoredPosition = new Vector2(115, -488);
-                panels[2].anchoredPosition = new Vector2(615, -488);
+                panels[0].anchoredPosition = new Vector2(-600, -480);
+                panels[1].anchoredPosition = new Vector2(-5, -480);
+                panels[2].anchoredPosition = new Vector2(580, -480);
                 break;
             case 4:
-                panels[0].anchoredPosition = new Vector2(-635, -470);
-                panels[1].anchoredPosition = new Vector2(-190, -470);
-                panels[2].anchoredPosition = new Vector2(250, -470);
-                panels[3].anchoredPosition = new Vector2(690, -470);
+                panels[0].anchoredPosition = new Vector2(-635, -480);
+                panels[1].anchoredPosition = new Vector2(-190, -480);
+                panels[2].anchoredPosition = new Vector2(250, -480);
+                panels[3].anchoredPosition = new Vector2(690, -480);
                 break;
         }
     }
@@ -124,16 +124,16 @@ public class UIManager : MonoBehaviour
         switch (value)
         {
             case 1:
-                skillChecks[0].transform.localPosition = new Vector2(-140, -488);
+                skillChecks[0].transform.localPosition = new Vector2(355, -255);
                 break;
             case 2:
-                skillChecks[0].transform.localPosition = new Vector2(-400, -488);
-                skillChecks[1].transform.localPosition = new Vector2(360, -488);
+                skillChecks[0].transform.localPosition = new Vector2(-145, -300);
+                skillChecks[1].transform.localPosition = new Vector2(850, -300);
                 break;
             case 3:
-                skillChecks[0].transform.localPosition = new Vector2(-450, -488);
-                skillChecks[1].transform.localPosition = new Vector2(115, -488);
-                skillChecks[2].transform.localPosition = new Vector2(615, -488);
+                skillChecks[0].transform.localPosition = new Vector2(-405, -200);
+                skillChecks[1].transform.localPosition = new Vector2(190, -200);
+                skillChecks[2].transform.localPosition = new Vector2(780, -200);
                 break;
             case 4:
                 skillChecks[0].transform.localPosition = new Vector2(-490, -200);
