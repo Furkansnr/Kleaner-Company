@@ -17,13 +17,6 @@ public class SkillCheck : MonoBehaviour
     public Image fillImage;
     private KeyCode keyCode;
 
-
-    private void OnEnable()
-    {
-        GameManager.instance.SkillCheckAppears += OpenSkillCheckPanel;
-        GameManager.instance.GameEnd += CloseSkillCheckPanel;
-    }
-
     private void OnDestroy()
     {
         GameManager.instance.SkillCheckAppears -= OpenSkillCheckPanel;
@@ -32,6 +25,8 @@ public class SkillCheck : MonoBehaviour
 
     private void Start()
     {
+        GameManager.instance.SkillCheckAppears += OpenSkillCheckPanel;
+        GameManager.instance.GameEnd += CloseSkillCheckPanel;
         SkillCheckParent.transform.localScale = Vector3.zero;
         SkillCheckParent.SetActive(false);
     }
