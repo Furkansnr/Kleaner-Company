@@ -51,6 +51,14 @@ public class MainMenu : MonoBehaviour
         TutorialB.onClick.AddListener(TutorialButton);
         TutorialPageRB.onClick.AddListener(TutorialPageRButton);
         TutorialPageLB.onClick.AddListener(TutorialPageLButton);
+        
+        musicVolume = PlayerPrefs.GetFloat("musicVolume", 100);
+        soundVolume = PlayerPrefs.GetFloat("soundVolume", 100);
+        musicSl.value = musicVolume;
+        soundSl.value = soundVolume;
+        
+        musicSl.onValueChanged.AddListener((arg0 => MusicSlider()));
+        soundSl.onValueChanged.AddListener((arg0 => SoundSlider()));
 
         playerCount = 0;
         GameData.instance.SetPlayerCount(playerCount+1);
@@ -67,15 +75,9 @@ public class MainMenu : MonoBehaviour
         TutorialB.onClick.RemoveAllListeners();
         TutorialPageRB.onClick.RemoveAllListeners();
         TutorialPageLB.onClick.RemoveAllListeners();
-
-        musicVolume = PlayerPrefs.GetFloat("musicVolume", 100);
-        soundVolume = PlayerPrefs.GetFloat("soundVolume", 100);
-
+        
         musicSl.value = musicVolume;
         soundSl.value = soundVolume;
-
-        musicSl.onValueChanged.AddListener((arg0 => MusicSlider()));
-        soundSl.onValueChanged.AddListener((arg0 => SoundSlider()));
 
         tempAddB.onClick.RemoveAllListeners();
         tempLessB.onClick.RemoveAllListeners();
@@ -83,23 +85,27 @@ public class MainMenu : MonoBehaviour
 
     void StartButton()
     {
+        ButtonSound();
         SceneManager.LoadScene(1);
     }
 
     void CreditsButton()
     {
+        ButtonSound();
         CreditsP.SetActive(true);
         BackB[0].onClick.AddListener(() => BackButton(CreditsP, 0));
     }
 
     void SettingsButton()
     {
+        ButtonSound();
         SettingsP.SetActive(true);
         BackB[1].onClick.AddListener(() => BackButton(SettingsP, 1));
     }
 
     void TutorialButton()
     {
+        ButtonSound();
         tutorialPage = 0;
         for (int i = 0; i < TutorialPagesP.Length; i++)
         {
@@ -114,6 +120,7 @@ public class MainMenu : MonoBehaviour
 
     void TutorialPageRButton()
     {
+        ButtonSound();
         TutorialPagesP[tutorialPage].SetActive(false);
         tutorialPage++;
         TutorialPagesP[tutorialPage].SetActive(true);
@@ -126,6 +133,7 @@ public class MainMenu : MonoBehaviour
 
     void TutorialPageLButton()
     {
+        ButtonSound();
         TutorialPagesP[tutorialPage].SetActive(false);
         tutorialPage--;
         TutorialPagesP[tutorialPage].SetActive(true);
@@ -138,12 +146,14 @@ public class MainMenu : MonoBehaviour
 
     void BackButton(GameObject closedPanel, int i)
     {
+        ButtonSound();
         closedPanel.SetActive(false);
         BackB[i].onClick.RemoveAllListeners();
     }
 
     void QuitButton()
     {
+        ButtonSound();
         Application.Quit();
     }
 
@@ -151,13 +161,19 @@ public class MainMenu : MonoBehaviour
     {
         soundVolume = soundSl.value;
         SoundAS.volume = soundVolume;
-        SoundAS.PlayOneShot(soundC);
+        if (soundVolume%10==0) 
+            SoundAS.PlayOneShot(soundC);
     }
 
     void MusicSlider()
     {
         musicVolume = musicSl.value;
         MusicAS.volume = musicVolume;
+    }
+
+    void ButtonSound()
+    {
+        SoundAS.PlayOneShot(soundC);
     }
 
     void TempLess()

@@ -4491,9 +4491,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Furkan Sener - Game Developer\nMuzaffer Mermer - 3D Artist\nOnur Demirel
-    - Game Developer\nSevval Yavuz - 2D Artist\nYavuz Selim Y\u0131ld\u0131z - Game
-    Developer"
+  m_text: "Furkan Sener - Game Developer\nMuzaffer Mermer - Game Designer\nOnur Demirel
+    - Game Developer\nSevval Yavuz - Game Artist\nYavuz Selim Y\u0131ld\u0131z -
+    Game Developer"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7dfb66480ca93c0429f3a75454ecbf9c, type: 2}
   m_sharedMaterial: {fileID: 6569286508608972808, guid: 7dfb66480ca93c0429f3a75454ecbf9c,
@@ -5429,7 +5429,7 @@ MonoBehaviour:
   - {fileID: 919850326}
   MusicAS: {fileID: 1636288482}
   SoundAS: {fileID: 1636288481}
-  soundC: {fileID: 0}
+  soundC: {fileID: 8300000, guid: 9cc91b1ab45a3644fbd8877343f39170, type: 3}
   soundSl: {fileID: 1838552097}
   musicSl: {fileID: 901716745}
   playerS:
@@ -5545,11 +5545,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: b10be88b70e612d4d9f5ff6d2f5ea332, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
