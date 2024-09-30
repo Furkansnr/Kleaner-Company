@@ -63,7 +63,7 @@ public class SkillCheck : MonoBehaviour
         upDown = true;
         indicator.anchoredPosition = new Vector2(indicator.anchoredPosition.x, -10);
         SkillCheckParent.SetActive(true);
-        SkillCheckParent.transform.DOScale(Vector3.one, 0.7f).SetEase(Ease.OutCirc);
+        SkillCheckParent.transform.DOScale(new Vector3(0.8f,0.8f,0.8f), 0.7f).SetEase(Ease.OutCirc);
         //SkillCheckParent.transform.DOScale(Vector3.zero, 1f).From().SetEase(Ease.InBounce);
     }
 
@@ -71,10 +71,6 @@ public class SkillCheck : MonoBehaviour
     {
         if (indicator.anchoredPosition.y >= indcymax) //220
         {
-            successArea.anchoredPosition = new Vector2(successArea.anchoredPosition.x, ymax); //-180
-            upDown = false;
-            checkUseable = true;
-            successArea.anchoredPosition = new Vector2(successArea.anchoredPosition.x, Random.Range(-90, -190));
             upDown = false;
             successArea.anchoredPosition = new Vector2(successArea.anchoredPosition.x, Random.Range(-90, -190));
             RandomizeSkillCheckHeight();
@@ -87,10 +83,6 @@ public class SkillCheck : MonoBehaviour
         }
         else if (indicator.anchoredPosition.y <= indcymin) //-10
         {
-            successArea.anchoredPosition = new Vector2(successArea.anchoredPosition.x, ymin); //-10
-            upDown = true;
-            checkUseable = true;
-            successArea.anchoredPosition = new Vector2(successArea.anchoredPosition.x, Random.Range(90, 190));
             upDown = true;
             successArea.anchoredPosition = new Vector2(successArea.anchoredPosition.x, Random.Range(90, 190));
             RandomizeSkillCheckHeight();
@@ -121,7 +113,7 @@ public class SkillCheck : MonoBehaviour
             if (IsIndicatorInSuccessArea())
             {
                 Debug.Log("Başarılı!");
-                StartCoroutine(SkillCheckDelay(1.1f));
+                StartCoroutine(SkillCheckDelay(1f));
                 checksSuccesfullyDone++;
                 fillImage.fillAmount = (float)checksSuccesfullyDone / 5f;
                 GameManager.instance.EmitSkillCheckSuccessfull(playerID, checksSuccesfullyDone);
@@ -132,12 +124,13 @@ public class SkillCheck : MonoBehaviour
                     checksSuccesfullyDone = 0;
                     CloseSkillCheckPanel();
                 }
-                else
-                {
-                    StartCoroutine(SkillCheckDelay(0.5f));
-                    Debug.Log("Başarısız!");
-                }
             }
+            else
+            {
+                StartCoroutine(SkillCheckDelay(0.5f));
+                Debug.Log("Başarısız!");
+            }
+            
         }
     }
 
