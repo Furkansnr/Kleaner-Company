@@ -63,7 +63,7 @@ public class Building : MonoBehaviour
         if (spawnChances[i] > Random.Range(0, 101))
         {
             GameObject dirt = Instantiate(dirtPrefab, spawnPoints[i]);
-            dirt.transform.localPosition = Vector3.zero;
+            dirt.transform.localPosition = new Vector3(-0.05f,0,0);
             dirt.transform.localRotation=Quaternion.Euler(0,0,90);
         }
         else

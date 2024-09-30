@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     private int[] playerScores = { 0, 0, 0, 0 };
     private string[] playerIDs;
-    [SerializeField]private float gameTimer = 60f;
+    [SerializeField]private float gameTimer = 10f;
     private bool isGameEnd;
     public Action<string, int> ScoreAction;
     public Action<string, float> DecreaseHealthAction;
