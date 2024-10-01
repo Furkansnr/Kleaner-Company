@@ -19,10 +19,12 @@ public class Board : MonoBehaviour
 
     public bool SetupBoard(Sprite playerImage, int playerScore)
     {
+        if (playerScore == 0) Destroy(gameObject);
         if (isAssign)
         {
             return true;
         }
+
         this.playerImage.sprite = playerImage;
         this.playerScore.text = playerScore.ToString();
         isAssign = true;

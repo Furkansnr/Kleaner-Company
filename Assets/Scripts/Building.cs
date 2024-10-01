@@ -32,7 +32,7 @@ public class Building : MonoBehaviour
     public void ResetRoomPosition(Transform room)
     {
         Vector3 newPosition= new Vector3(room.transform.localPosition.x,
-            room.transform.localPosition.y + 4.05f);
+            room.transform.localPosition.y + 5.4f);
         Destroy(room.gameObject);
         GameObject newRoom = Instantiate(GetRandomRoom(), transform);
         newRoom.transform.localPosition = newPosition;
@@ -44,7 +44,7 @@ public class Building : MonoBehaviour
         }
     }
 
-    private GameObject GetRandomRoom() => rooms[Random.Range(0, rooms.Length - 1)];
+    private GameObject GetRandomRoom() => rooms[Random.Range(0, rooms.Length)];
 
     private void DestroySpawnChilds(Transform[] spawnPoints, int i)
     {

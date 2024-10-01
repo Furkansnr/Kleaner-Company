@@ -5,6 +5,7 @@ using DG.Tweening;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -193,6 +194,7 @@ public class UIManager : MonoBehaviour
         q.Append(gameEndPanel.transform.DOScale(Vector3.zero, 0.75f).From().SetEase(Ease.OutCubic));
         for (int i = 0; i < boardsRect.Length; i++)
         {
+            if (boardsRect[i]==null) continue;
             q.Append(boardsRect[i].transform.DOScale(Vector3.zero, 0.75f).From()
                 .SetEase(Ease.OutBack));
         }
@@ -204,5 +206,20 @@ public class UIManager : MonoBehaviour
         }
 
         q.Play();
+    }
+
+    public void MainMenuButton()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void RestartButton()
+    {
+        SceneManager.LoadScene("GameScene");
+    }
+
+    public void ExitButton()
+    {
+        Application.Quit();
     }
 }

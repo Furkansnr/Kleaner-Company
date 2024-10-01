@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerBrush : MonoBehaviour
 {
-    private enum State
+     private enum State
     {
         Idle,
         Clean,
@@ -33,6 +33,7 @@ public class PlayerBrush : MonoBehaviour
     private Material spongeMaterial;
     private Vector3 backIdlePos;
     private KeyCode cleanKeyCode;
+    private bool isOpenSkillCheck;
     private void Awake()
     {
         spongeMaterial = GetComponent<Renderer>().material;
@@ -175,7 +176,11 @@ public class PlayerBrush : MonoBehaviour
         }
 
         DecreaseHealth();
+        CleanRay();
+    }
 
+    private void CleanRay()
+    {
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 10f,
                 dirtLayer))
         {
@@ -194,12 +199,15 @@ public class PlayerBrush : MonoBehaviour
                 .SetEase(Ease.OutSine);
             _backTween.Play();
         }
+        DecreaseHealth();
+        CleanRay();
     }
 
     private void DirtyState()
     {
         GameManager.instance.SkillCheckSuccesfull += SkillCheckSuccesfull;
-        if (health >= 0) return;
+        if (health >= 0 || isOpenSkillCheck) return;
+        isOpenSkillCheck = true;
         Vector3 newPos = ObjectMaker.instance.SpawnWaterBucket(new Vector3(
             transform.position.x, transform.position.y, cleanZaxis - 0.35f),playerID);
         transform.DOMove(newPos, 0.5f);
@@ -245,6 +253,7 @@ public class PlayerBrush : MonoBehaviour
         if (this.playerID != playerID) return;
         health = 100;
         spongeMaterial.SetFloat("_dirt_power", 0);
+        isOpenSkillCheck = false;
     }
 
     private void BubleActive(bool active)
