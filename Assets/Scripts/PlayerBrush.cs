@@ -34,6 +34,7 @@ public class PlayerBrush : MonoBehaviour
     private Vector3 backIdlePos;
     private KeyCode cleanKeyCode;
     private bool isOpenSkillCheck;
+    [SerializeField] private AudioSource cleanAS;
     private void Awake()
     {
         spongeMaterial = GetComponent<Renderer>().material;
@@ -42,6 +43,7 @@ public class PlayerBrush : MonoBehaviour
         backIdlePos = new Vector3(transform.position.x, transform.position.y, firstZaxis);
         playerID = GetPlayerID();
         cleanKeyCode = GetPlayerCleanKeyCode();
+        cleanAS.volume = PlayerPrefs.GetFloat("soundVolume", 100);
     }
 
 
@@ -181,10 +183,14 @@ public class PlayerBrush : MonoBehaviour
 
     private void CleanRay()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 10f,
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 50f,
                 dirtLayer))
         {
             hit.collider.GetComponent<DirtClean>().Clean(hit, scaleFactor, playerID);
+            if (!cleanAS.isPlaying)
+            {
+                cleanAS.Play();
+            }
         }
     }
 
