@@ -160,7 +160,7 @@ public class MainMenu : MonoBehaviour
     void SoundSlider()
     {
         soundVolume = soundSl.value;
-        SoundAS.volume = soundVolume;
+        SoundAS.volume = soundVolume/100;
         if (soundVolume%10==0) 
             SoundAS.PlayOneShot(soundC);
     }
@@ -168,7 +168,7 @@ public class MainMenu : MonoBehaviour
     void MusicSlider()
     {
         musicVolume = musicSl.value;
-        MusicAS.volume = musicVolume;
+        MusicAS.volume = musicVolume/100;
     }
 
     void ButtonSound()
