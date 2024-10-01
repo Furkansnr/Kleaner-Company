@@ -32,7 +32,7 @@ public class Building : MonoBehaviour
     public void ResetRoomPosition(Transform room)
     {
         Vector3 newPosition= new Vector3(room.transform.localPosition.x,
-            room.transform.localPosition.y + 5.4f);
+            room.transform.localPosition.y + 6.75f);
         Destroy(room.gameObject);
         GameObject newRoom = Instantiate(GetRandomRoom(), transform);
         newRoom.transform.localPosition = newPosition;
@@ -62,8 +62,9 @@ public class Building : MonoBehaviour
         // Spawn new dirt object or increase spawn chance for later
         if (spawnChances[i] > Random.Range(0, 101))
         {
+            spawnChances[i] = 50;
             GameObject dirt = Instantiate(dirtPrefab, spawnPoints[i]);
-            dirt.transform.localPosition = new Vector3(-0.05f,0,0);
+            dirt.transform.localPosition = new Vector3(-0.1f,0,0);
             dirt.transform.localRotation=Quaternion.Euler(0,0,90);
         }
         else

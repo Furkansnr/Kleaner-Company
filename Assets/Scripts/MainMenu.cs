@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening.Core.Easing;
@@ -83,6 +84,14 @@ public class MainMenu : MonoBehaviour
         tempLessB.onClick.RemoveAllListeners();
     }
 
+    private void Start()
+    {
+        soundSl.value = PlayerPrefs.GetFloat("soundVolume",0.5f);
+        musicSl.value = PlayerPrefs.GetFloat("musicVolume",0.5f);
+        SoundAS.volume = PlayerPrefs.GetFloat("soundVolume",0.5f);
+        MusicAS.volume = PlayerPrefs.GetFloat("musicVolume",0.5f);
+    }
+
     void StartButton()
     {
         ButtonSound();
@@ -160,7 +169,7 @@ public class MainMenu : MonoBehaviour
     void SoundSlider()
     {
         soundVolume = soundSl.value;
-        float a = soundVolume/100;
+        float a = soundVolume;
         SoundAS.volume = a;
         PlayerPrefs.SetFloat("soundVolume", a);
         if (soundVolume%10==0) 
@@ -170,7 +179,7 @@ public class MainMenu : MonoBehaviour
     void MusicSlider()
     {
         musicVolume = musicSl.value;
-        float a = musicVolume/100;
+        float a = musicVolume;
         MusicAS.volume = a;
         PlayerPrefs.SetFloat("musicVolume", a);
     }
@@ -184,6 +193,7 @@ public class MainMenu : MonoBehaviour
     {
         if (playerCount > 0)
         {
+            ButtonSound();
             playerS[playerCount].SetActive(false);
             playerCount--;
             GameData.instance.SetPlayerCount(playerCount+1);
@@ -194,6 +204,7 @@ public class MainMenu : MonoBehaviour
     {
         if (playerCount < 3)
         {
+            ButtonSound();
             playerCount++;
             GameData.instance.SetPlayerCount(playerCount+1);
             playerS[playerCount].SetActive(true);

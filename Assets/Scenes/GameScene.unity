@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: d9dca9ae1786c394f9e79c637aa9a7bf, type: 2}
+  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43596905, g: 0.55358094, b: 0.5430385, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028554, g: 0.22571614, b: 0.30692446, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -438,6 +438,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7571411122660002870, guid: 4f72621c6b34980489d633183d77b796,
         type: 3}
+      propertyPath: scaleFactor
+      value: 0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 7571411122660002870, guid: 4f72621c6b34980489d633183d77b796,
+        type: 3}
       propertyPath: decreaseSpeed
       value: 20
       objectReference: {fileID: 0}
@@ -802,6 +807,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7571411122660002870, guid: 4f72621c6b34980489d633183d77b796,
         type: 3}
+      propertyPath: scaleFactor
+      value: 0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 7571411122660002870, guid: 4f72621c6b34980489d633183d77b796,
+        type: 3}
       propertyPath: decreaseSpeed
       value: 20
       objectReference: {fileID: 0}
@@ -1035,6 +1045,11 @@ PrefabInstance:
         type: 3}
       propertyPath: firstZaxis
       value: -2.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7571411122660002870, guid: 4f72621c6b34980489d633183d77b796,
+        type: 3}
+      propertyPath: scaleFactor
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 7571411122660002870, guid: 4f72621c6b34980489d633183d77b796,
         type: 3}
@@ -1491,6 +1506,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 93293734759491615, guid: 45658951d2e2b1f46b83a04aeba312e5,
+        type: 3}
+      propertyPath: gameTimer
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 93293734759491615, guid: 45658951d2e2b1f46b83a04aeba312e5,
         type: 3}
@@ -2131,6 +2151,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5037517067098934208, guid: eaf0ef0727862b54e834c25995e63459,
+        type: 3}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5037517067098934208, guid: eaf0ef0727862b54e834c25995e63459,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5037517067098934208, guid: eaf0ef0727862b54e834c25995e63459,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5531642951035786302, guid: eaf0ef0727862b54e834c25995e63459,
         type: 3}
@@ -3377,6 +3412,11 @@ PrefabInstance:
         type: 3}
       propertyPath: firstZaxis
       value: -2.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7571411122660002870, guid: 4f72621c6b34980489d633183d77b796,
+        type: 3}
+      propertyPath: scaleFactor
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 7571411122660002870, guid: 4f72621c6b34980489d633183d77b796,
         type: 3}
