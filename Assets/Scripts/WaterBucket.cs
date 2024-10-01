@@ -32,7 +32,7 @@ public class WaterBucket : MonoBehaviour
     {
         if (this.playerID != playerID) return;
         succesfullParticle.Play();
-        if (value == 5)
+        if (value == 3)
             DestroyAnimation();
     }
 

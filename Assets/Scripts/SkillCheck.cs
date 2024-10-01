@@ -115,9 +115,9 @@ public class SkillCheck : MonoBehaviour
                 Debug.Log("Başarılı!");
                 StartCoroutine(SkillCheckDelay(1f));
                 checksSuccesfullyDone++;
-                fillImage.fillAmount = (float)checksSuccesfullyDone / 5f;
+                fillImage.fillAmount = (float)checksSuccesfullyDone / 3f;
                 GameManager.instance.EmitSkillCheckSuccessfull(playerID, checksSuccesfullyDone);
-                if (checksSuccesfullyDone >= 5)
+                if (checksSuccesfullyDone >= 3)
                 {
                     GameManager.instance.EmitSpongeFilled(playerID);
                     fillImage.fillAmount = 0;
@@ -143,7 +143,7 @@ public class SkillCheck : MonoBehaviour
 
     public void RandomizeSkillCheckHeight()
     {
-        float heightSucces = Random.Range(26, 35);
+        float heightSucces = Random.Range(30, 90);
         successArea.sizeDelta = new Vector2(successArea.sizeDelta.x, heightSucces);
     }
 

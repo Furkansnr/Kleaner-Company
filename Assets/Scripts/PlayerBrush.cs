@@ -212,7 +212,7 @@ public class PlayerBrush : MonoBehaviour
         Sequence q = DOTween.Sequence().SetLoops(2, LoopType.Yoyo)
             .OnComplete((() =>
             {
-                if (value != 5)
+                if (value != 3)
                     _playerState = State.Dirty;
                 else
                 {
